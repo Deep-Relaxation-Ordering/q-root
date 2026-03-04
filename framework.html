@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Framework — Quantum Relaxation Ordering</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="site-title" href="index.html">
+      <strong>Quantum Relaxation Ordering</strong> &nbsp;/&nbsp; Open Science
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dossier.html">Dossier</a>
+      <a href="framework.html" class="active">Framework</a>
+      <a href="tutorial.html">Tutorials</a>
+      <a href="numerics.html">Numerics</a>
+      <a href="references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="status-banner">
+  <div class="status-inner">
+    <span class="status-chip"><span class="label">version</span>0.1</span>
+    <span class="status-chip open"><span class="label">type</span>falsifiable claim architecture</span>
+    <span class="status-chip pending"><span class="label">pre-registration</span>pending · analysis method not yet filed</span>
+    <span class="status-chip"><span class="label">stewards</span>Colla, A. &amp; Warring, U.</span>
+  </div>
+</div>
+
+<main>
+
+  <h1 class="page-title">Falsifiable Framework</h1>
+  <p class="page-subtitle">Which claim, which measure, which crossing &mdash; and what would kill it</p>
+
+  <div class="callout status-note">
+    <div class="callout-label">Framework Purpose</div>
+    This page defines the specific claim this programme is testing, in a form that can be confirmed or killed. It is not a review of the Mpemba field in general. It is a boundary document for this platform and this experiment.
+  </div>
+
+  <!-- Measure Box -->
+  <hr class="section-rule">
+  <h2>The Operative Distance Measure</h2>
+
+  <div class="callout measure">
+    <div class="callout-label">Measure Box — Platform-Specific Definition</div>
+    <p style="margin-bottom:0.5rem;">The distance measure operative in this programme is the <strong>trace distance on the spin reduced state</strong>:</p>
+    <div class="math-block" style="margin:0.6rem 0;">
+D(ρ, σ) = ½ Tr|ρ − σ|
+    </div>
+    <p style="margin-bottom:0.4rem;">where ρ and σ are the spin reduced density matrices obtained by tracing out the motional mode.</p>
+    <p style="margin:0;"><strong>Other measures in the literature</strong> (entanglement asymmetry, Frobenius distance, free energy distance) are noted in the References section. They are not the primary claim of this programme. Results will not be selectively reported in a measure that happens to show a crossing.
+    </p>
+  </div>
+
+  <!-- Primary Claim -->
+  <hr class="section-rule">
+  <h2>The Primary Claim</h2>
+
+  <p>We test the following claim, derived from Strachan et al. (PRL 134, 220403, 2025):</p>
+
+  <div class="math-block">
+Claim C1 (non-Markovian quantum Mpemba effect):
+
+There exist initial states ρ_A, ρ_B of the spin subsystem such that:
+
+  (i)   D(ρ_A(0), ρ_ss) &gt; D(ρ_B(0), ρ_ss)       [A starts farther]
+  (ii)  ∃ t* &gt; 0 :  D(ρ_A(t*), ρ_ss) &lt; D(ρ_B(t*), ρ_ss)   [A crosses below B]
+  (iii) The crossing time t* scales with bath memory time τ_bath
+        in the way predicted by Strachan et al.
+  (iv)  The crossing is absent under Markovian dynamics
+        with the same steady state.
+</div>
+
+  <p>Condition (iv) is the diagnostic that distinguishes the non-Markovian mechanism from a trivial crossing due to initial-state geometry alone.</p>
+
+  <!-- What Would Confirm -->
+  <hr class="section-rule">
+  <h2>What Would Confirm C1</h2>
+
+  <ul style="margin-left:1.2rem; line-height:2.2;">
+    <li>Observation of the trace-distance crossing D(ρ_A, ρ_ss) &lt; D(ρ_B, ρ_ss) at a time t* consistent with theoretical predictions, for a pair (ρ_A, ρ_B) with D(ρ_A(0)) &gt; D(ρ_B(0)).</li>
+    <li>The crossing time t* shifts systematically with bath memory time τ_bath as predicted.</li>
+    <li>The crossing disappears when the bath spectral density is broadened to the Markovian limit (δ-function spectral density).</li>
+    <li>Results are reproduced across multiple initial-state pairs on the predicted crossing manifold.</li>
+  </ul>
+
+  <!-- What Would Kill It -->
+  <hr class="section-rule">
+  <h2>What Would Kill C1</h2>
+
+  <ul style="margin-left:1.2rem; line-height:2.2;">
+    <li>No crossing in trace distance is observed for any pair (ρ_A, ρ_B) within the accessible parameter range, despite confirmed non-Markovian bath dynamics.</li>
+    <li>A crossing is observed but t* does not scale with τ_bath — indicating a classical geometric mechanism rather than bath-memory-induced Mpemba behaviour.</li>
+    <li>The crossing is present in the Markovian limit, indicating C1 is not the operative mechanism.</li>
+    <li>The crossing is smaller than the experimental resolution in trace distance.</li>
+  </ul>
+
+  <!-- System Model -->
+  <hr class="section-rule">
+  <h2>System Model</h2>
+
+  <h3>Spin-Boson Hamiltonian</h3>
+  <div class="math-block">
+H = (ω_0/2) σ_z  +  ω_m a†a  +  g σ_x (a + a†)  +  H_bath
+
+where:
+  ω_0   = qubit transition frequency
+  ω_m   = motional mode frequency
+  g     = spin-motion coupling (Lamb-Dicke regime: g ≪ ω_m)
+  H_bath = structured bath with peaked spectral density J(ω)
+</div>
+
+  <h3>Reduced Steady State (RSS)</h3>
+  <p>The spin RSS is obtained by evolving from an arbitrary initial state to long times and tracing out the motional mode. It depends on (ω_0, ω_m, g, T, bath parameters). The RSS is not necessarily the maximally mixed state — its structure encodes the system-bath coupling.</p>
+
+  <div class="math-block">
+ρ_ss = Tr_motion[ lim_{t→∞} ρ_total(t) ]
+</div>
+
+  <h3>Bath Engineering in the Trapped-Ion Platform</h3>
+  <p>The non-Markovian bath is implemented by placing controlled noise on the motional mode with a peaked power spectral density. This maps to a spin-boson spectral density J(ω) ∝ γ²/[(ω − ω_m)² + γ²], where γ controls the bath memory time: τ_bath = 1/γ. The Markovian limit corresponds to γ → ∞.</p>
+
+  <!-- Pre-registration -->
+  <hr class="section-rule">
+  <h2>Pre-Registration Commitment</h2>
+
+  <div class="callout status-note">
+    <div class="callout-label">Analysis Protocol</div>
+    <p style="margin-bottom:0.5rem;">The analysis method — including the fitting procedure for t*, the error model for trace distance, and the statistical test for the crossing — will be pre-registered before any experimental data are examined.</p>
+    <p style="margin:0;">This commitment applies also to the 2016 archival dataset. That data will not be accessed until the pre-registration is filed and publicly timestamped. This is not a bureaucratic constraint — it is the scientific content of the claim.</p>
+  </div>
+
+  <!-- Definition proliferation note -->
+  <hr class="section-rule">
+  <h2>Note on Definition Proliferation</h2>
+
+  <p>The quantum Mpemba literature uses multiple non-equivalent distance measures: entanglement asymmetry (Ares et al.), Frobenius distance, free energy distance, and trace distance. Each can yield a crossing under different conditions, and not all crossings share a common mechanism.</p>
+
+  <p>This programme does not contribute another example using a conveniently chosen measure. It uses trace distance on the spin reduced state because:</p>
+  <ul style="margin-left:1.2rem; line-height:2.2;">
+    <li>It is operationally defined via spin-state tomography on the platform.</li>
+    <li>It is the measure used in the Strachan et al. predictions we are testing.</li>
+    <li>It satisfies the contractivity property under CPTP maps, making it a physically meaningful distinguishability.</li>
+  </ul>
+  <p>If results in other measures are reported, they will be labelled clearly and distinguished from C1.</p>
+
+</main>
+
+<footer>
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Experimental Quantum &amp; Atomic Physics, Freiburg &nbsp;·&nbsp;
+  <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
+</footer>
+
+</body>
+</html>

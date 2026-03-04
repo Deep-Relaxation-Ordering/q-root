@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials — Quantum Relaxation Ordering</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="site-title" href="index.html">
+      <strong>Quantum Relaxation Ordering</strong> &nbsp;/&nbsp; Open Science
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dossier.html">Dossier</a>
+      <a href="framework.html">Framework</a>
+      <a href="tutorial.html" class="active">Tutorials</a>
+      <a href="numerics.html">Numerics</a>
+      <a href="references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="status-banner">
+  <div class="status-inner">
+    <span class="status-chip open"><span class="label">audience</span>open — MSc / PhD level assumed</span>
+    <span class="status-chip"><span class="label">prerequisites</span>quantum mechanics · density matrices · harmonic oscillator</span>
+    <span class="status-chip"><span class="label">stewards</span>Colla, A. &amp; Warring, U.</span>
+  </div>
+</div>
+
+<main>
+
+  <h1 class="page-title">Tutorials</h1>
+  <p class="page-subtitle">From Lindblad dynamics to the quantum Mpemba effect &mdash; conceptual and computational building blocks</p>
+
+  <p>These tutorials build the conceptual scaffolding needed to understand, simulate, and eventually test the quantum Mpemba effect in a trapped-ion system. They are written for readers with a graduate quantum mechanics background who are not specialists in open quantum systems. Familiarity with density matrices and the harmonic oscillator is assumed.</p>
+
+  <!-- T1 -->
+  <hr class="section-rule">
+  <h2>T1 &nbsp; Open Quantum Systems: the Lindblad Master Equation</h2>
+
+  <h3>Why open systems?</h3>
+  <p>A trapped ion is never truly isolated. It couples to motional modes, laser fields, and background electromagnetic fluctuations. The correct framework is an <em>open quantum system</em>: a small system of interest (the spin, or spin + motion) coupled to a large environment (the bath).</p>
+
+  <h3>The Lindblad form</h3>
+  <p>When the bath is Markovian (memoryless) and the system-bath coupling is weak, the reduced density matrix of the system evolves as:</p>
+
+  <div class="math-block">
+d/dt ρ = -i[H, ρ]  +  Σ_k γ_k ( L_k ρ L_k†  −  ½ L_k†L_k ρ  −  ½ ρ L_k†L_k )
+         ↑ coherent    ↑ jump                  ↑ anti-commutator (probability conserving)
+</div>
+
+  <p>The L_k are <strong>jump operators</strong> encoding the system-bath interaction. γ_k are the corresponding rates. The first term is coherent (Hamiltonian) evolution. The second is dissipation.</p>
+
+  <h3>Example: single spin with decay</h3>
+  <div class="math-block">
+H = (ω_0/2) σ_z
+L = √γ σ_-          (spontaneous decay to ground state)
+
+In matrix form (basis {|↑⟩, |↓⟩}):
+
+d/dt ρ_↑↑ = -γ ρ_↑↑
+d/dt ρ_↓↓ = +γ ρ_↑↑
+d/dt ρ_↑↓ = -(γ/2 + iω_0) ρ_↑↓
+</div>
+
+  <p>The steady state is ρ_ss = |↓⟩⟨↓|. The off-diagonal (coherence) decays at rate γ/2. The population decays at rate γ.</p>
+
+  <!-- T2 -->
+  <hr class="section-rule">
+  <h2>T2 &nbsp; Liouvillian Spectra and Relaxation Modes</h2>
+
+  <h3>The Lindblad equation as a linear map</h3>
+  <p>Writing ρ as a column vector (vectorisation), the Lindblad equation becomes:</p>
+
+  <div class="math-block">
+d/dt |ρ⟩⟩ = ℒ |ρ⟩⟩
+
+where ℒ is the Liouvillian superoperator (an n²×n² matrix for an n-dimensional Hilbert space).
+</div>
+
+  <h3>Eigendecomposition</h3>
+  <div class="math-block">
+ℒ R_k = λ_k R_k       (right eigenoperators)
+
+General solution:
+  ρ(t) = ρ_ss  +  Σ_{k≥1} c_k e^{λ_k t} R_k
+
+where λ_0 = 0 (steady state), Re(λ_k) &lt; 0 for all k ≥ 1.
+</div>
+
+  <h3>Relaxation gap and slowest mode</h3>
+  <p>The eigenvalue λ₁ closest to zero (smallest |Re(λ₁)|) determines the long-time relaxation. Define the <strong>relaxation gap</strong>:</p>
+  <div class="math-block">
+Δ = |Re(λ_1)|
+
+τ_relax = 1/Δ
+</div>
+
+  <h3>The Mpemba condition in spectral language</h3>
+  <div class="math-block">
+c_k = ⟨⟨L_k | ρ(0) − ρ_ss ⟩⟩    (overlap with left eigenoperators)
+
+Mpemba condition: c_1 ≈ 0
+
+When c_1 = 0, the slow mode R_1 is absent from the initial deviation.
+Relaxation is dominated by faster modes R_2, R_3, ...
+The system appears to equilibrate faster despite starting farther away.
+</div>
+
+  <div class="callout measure">
+    <div class="callout-label">Geometric Interpretation</div>
+    The set of initial states with c₁ = 0 forms a hyperplane in state space — the <em>Mpemba manifold</em>. States on this manifold reach the neighbourhood of ρ_ss faster than states off it, even when the latter start closer. Finding the Mpemba manifold for the spin-motion system is a core numerical task (see Numerics).
+  </div>
+
+  <!-- T3 -->
+  <hr class="section-rule">
+  <h2>T3 &nbsp; The Reduced Steady State (RSS)</h2>
+
+  <h3>What is the RSS?</h3>
+  <p>In a coupled spin-motion system, the full steady state ρ_ss^{total} lives in the joint Hilbert space. When we measure only the spin (via fluorescence or state tomography), we access the <strong>reduced steady state</strong>:</p>
+
+  <div class="math-block">
+ρ_ss^{spin} = Tr_motion[ ρ_ss^{total} ]
+</div>
+
+  <p>The RSS is generally <em>not</em> the maximally mixed state, and it is <em>not</em> a thermal state in the simple sense. Its structure depends on ω_0, ω_m, g, T, and bath parameters. This is a non-trivial feature of the problem.</p>
+
+  <h3>Why the RSS is central to the Mpemba experiment</h3>
+  <p>The quantum Mpemba scenario we are testing requires:</p>
+  <ol style="margin-left:1.2rem; line-height:2.2;">
+    <li>Initialise the spin in state ρ_A farther from ρ_ss^{spin} (in trace distance).</li>
+    <li>Initialise the spin in state ρ_B closer to ρ_ss^{spin}.</li>
+    <li>Evolve both under the same dynamics.</li>
+    <li>Show that ρ_A(t) passes below ρ_B(t) in distance to ρ_ss at some crossing time t*.</li>
+  </ol>
+  <p>Step 1 requires knowing ρ_ss^{spin} accurately — which requires either a long simulation or careful analysis of the Liouvillian fixed point.</p>
+
+  <h3>A diagnostic check: initialise in the RSS itself</h3>
+  <p>A first simulation check: if the spin is initialised in ρ_ss^{spin} but the motional mode is at a thermal state with temperature T ≠ 0, the spin will <em>evolve away</em> from ρ_ss^{spin} and then return at long times. This is the signature that ρ_ss^{spin} is not a local fixed point of the spin-only dynamics — it is a global fixed point of the full coupled dynamics. This check is implemented in the Numerics toolbox.</p>
+
+  <!-- T4 -->
+  <hr class="section-rule">
+  <h2>T4 &nbsp; Lamb-Dicke Approximation and its Limits</h2>
+
+  <h3>The Lamb-Dicke parameter</h3>
+  <div class="math-block">
+η = k · x_zpf = k · √(ℏ / 2mω_m)
+
+where k is the laser wavevector and x_zpf is the zero-point motion amplitude.
+
+Lamb-Dicke regime: η √(⟨n⟩ + 1) ≪ 1
+</div>
+
+  <h3>What changes outside Lamb-Dicke?</h3>
+  <p>In the Lamb-Dicke (LD) regime, the spin-motion coupling is linear and the effective decay rates are frequency-independent. Outside LD, higher sideband orders contribute, the effective spectral density becomes non-trivial, and the mapping to a simple spin-boson model acquires corrections.</p>
+
+  <div class="callout status-note">
+    <div class="callout-label">Numerical Check</div>
+    The simulation pipeline (see Numerics) explicitly checks how much the predicted Mpemba crossing changes when the LD approximation is relaxed. This is a parameter scan over η at fixed g and T. If the crossing is robust beyond LD, it strengthens the experimental case.
+  </div>
+
+  <h3>Typical values in the Freiburg platform</h3>
+  <div class="math-block">
+η ≈ 0.05 – 0.15    (depending on mode and laser geometry)
+⟨n⟩ at T ≈ 300 µK motional temperature: ⟨n⟩ ≈ 5–20
+
+LD criterion: η √(⟨n⟩ + 1) ≈ 0.05 · √21 ≈ 0.23   [borderline]
+→ LD corrections should be checked, not assumed negligible.
+</div>
+
+  <!-- T5 -->
+  <hr class="section-rule">
+  <h2>T5 &nbsp; Trace Distance: Computation and Measurement</h2>
+
+  <h3>Definition</h3>
+  <div class="math-block">
+D(ρ, σ) = ½ Tr|ρ − σ|  =  ½ Σ_i |s_i|
+
+where s_i are the singular values of (ρ − σ).
+For qubit states (2×2 matrices), this simplifies to:
+
+D(ρ, σ) = ½ √[ (ρ_↑↑ − σ_↑↑)²  +  |ρ_↑↓ − σ_↑↓|² · 4 ]
+         = ½ |Bloch vector difference|
+</div>
+
+  <h3>Experimental access</h3>
+  <p>For a qubit spin, trace distance to a known target state ρ_ss requires measuring all three Bloch vector components: ⟨σ_x⟩, ⟨σ_y⟩, ⟨σ_z⟩. This is done via standard quantum state tomography: three sets of measurements with pulses before readout.</p>
+
+  <h3>Statistical considerations</h3>
+  <p>Trace distance is a non-linear function of the density matrix. Statistical error propagation from shot noise is non-trivial. The pre-registration will specify the bootstrapping procedure used to obtain confidence intervals on D(ρ(t), ρ_ss) at each time point.</p>
+
+</main>
+
+<footer>
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Experimental Quantum &amp; Atomic Physics, Freiburg &nbsp;·&nbsp;
+  <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
+</footer>
+
+</body>
+</html>

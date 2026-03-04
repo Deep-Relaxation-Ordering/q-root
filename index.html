@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantum Relaxation Ordering — Open Science Repository</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="site-title" href="index.html">
+      <strong>Quantum Relaxation Ordering</strong> &nbsp;/&nbsp; Open Science
+    </a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="dossier.html">Dossier</a>
+      <a href="framework.html">Framework</a>
+      <a href="tutorial.html">Tutorials</a>
+      <a href="numerics.html">Numerics</a>
+      <a href="references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="status-banner">
+  <div class="status-inner">
+    <span class="status-chip"><span class="label">version</span>0.1-alpha</span>
+    <span class="status-chip open"><span class="label">status</span>solo open science · contributions welcome</span>
+    <span class="status-chip pending"><span class="label">pre-registration</span>pending</span>
+    <span class="status-chip"><span class="label">stewards</span>Colla, A. &amp; Warring, U.</span>
+  </div>
+</div>
+
+<main>
+
+  <h1 class="page-title">Can Farther Beat Closer?</h1>
+  <p class="page-subtitle">Quantum relaxation ordering in trapped-ion systems &mdash; an open research programme</p>
+
+  <dl class="meta-block">
+    <dt>Repository</dt><dd>github.com/quantum-relaxation-ordering</dd>
+    <dt>Stewards</dt><dd>Colla, Alessandra &nbsp;&middot;&nbsp; Warring, Ulrich</dd>
+    <dt>Affiliation</dt><dd>Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburg</dd>
+    <dt>Launched</dt><dd>2026 &nbsp;&middot;&nbsp; Version 0.1-alpha</dd>
+    <dt>Licence</dt><dd>CC BY 4.0 (text) &nbsp;&middot;&nbsp; MIT (code)</dd>
+  </dl>
+
+  <div class="callout open-invite">
+    <div class="callout-label">Open Invitation</div>
+    This repository is launched ahead of collaboration. It documents what is being done, how it is being done, and why—so that anyone who finds it interesting can see exactly where to step in. No promises, no predefined outcome. An opportunity to work together on something worth ordering properly.
+  </div>
+
+  <hr class="section-rule">
+  <h2>What This Is</h2>
+
+  <p>The <em>Mpemba effect</em> describes a situation in which a system initially <em>farther</em> from equilibrium relaxes <em>faster</em> than one closer to it. In classical thermodynamics this observation is ancient and contested. In quantum systems, a rigorous spectral interpretation has emerged over the past decade — and with it, the possibility of a precise, falsifiable experimental test.</p>
+
+  <p>This repository hosts a growing research programme aimed at realising such a test in a trapped-ion platform. It proceeds in public, solo at launch, with an open toolbox. Theory, numerics, tutorials, and eventually experimental data — all in one place, openly inspectable, freely usable.</p>
+
+  <hr class="section-rule thin">
+  <h2>Site Sections</h2>
+
+  <div class="stage-grid">
+    <div class="stage-card">
+      <div class="stage-num">01 — DOSSIER</div>
+      <h4>Research Dossier</h4>
+      <p>Consolidated overview: classical → stochastic → quantum regimes. The living document of the programme.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">02 — FRAMEWORK</div>
+      <h4>Falsifiable Framework</h4>
+      <p>Which claim, which distance measure, which crossing. What would confirm or kill it.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">03 — TUTORIALS</div>
+      <h4>Tutorials</h4>
+      <p>Lindblad dynamics, Liouvillian spectra, the reduced steady state (RSS). Open to all readers.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">04 — NUMERICS</div>
+      <h4>Numerics Toolbox</h4>
+      <p>Python/QuTiP simulation pipeline. Live, growing, openly inspectable. Results rendered here.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">05 — REFERENCES</div>
+      <h4>References</h4>
+      <p>Annotated landscape of classical, stochastic, and quantum Mpemba literature.</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+  <h2>Current Focus</h2>
+
+  <p>The immediate experimental target is the <strong>non-Markovian quantum Mpemba effect</strong> as defined by Strachan et al. (PRL 134, 220403, 2025). This work predicts qualitatively new crossing behaviour tied to bath memory structure — and makes quantitative predictions about crossing times and threshold asymmetries that can be tested on a trapped-ion platform.</p>
+
+  <p>The primary observable is the <strong>trace distance</strong> between the spin reduced state and the reduced steady state (RSS):</p>
+
+  <div class="math-block">
+D(ρ, σ) = ½ Tr|ρ − σ|
+
+A quantum Mpemba effect is observed when:
+  D(ρ_A(0), ρ_ss) &gt; D(ρ_B(0), ρ_ss)   [A starts farther]
+  but
+  τ_A &lt; τ_B                              [A equilibrates faster]
+</div>
+
+  <div class="callout status-note">
+    <div class="callout-label">Pre-Registration Commitment</div>
+    The analysis method will be pre-registered before any experimental data are examined. This discipline is the point, not an obstacle. Numerical work and simulation tooling proceed in parallel and are documented here as they develop.
+  </div>
+
+  <hr class="section-rule">
+  <h2>GitBook Links</h2>
+  <p>Two precursor documents live in the <em>Ions in Freiburg</em> open-science harbour:</p>
+  <ul style="margin-left:1.2rem; margin-bottom:1rem;">
+    <li style="margin-bottom:0.4rem;"><a href="https://uwarring.gitbook.io/ions-in-freiburg/invariant-frameworks/signatures-of-equilibration-a-design-space-map" target="_blank">Signatures of Equilibration — A Design-Space Map</a> (Invariant Framework, v0.4)</li>
+    <li><a href="https://uwarring.gitbook.io/ions-in-freiburg/essays/can-farther-beat-closer-a-falsifiable-framework-for-quantum-relaxation-ordering" target="_blank">Can "Farther" Beat "Closer"? A Falsifiable Framework for Quantum Relaxation Ordering</a> (Essay)</li>
+  </ul>
+  <p>This repository is the operational complement to those documents — where the code runs and the data will live.</p>
+
+</main>
+
+<footer>
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Experimental Quantum &amp; Atomic Physics, Freiburg &nbsp;·&nbsp;
+  <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Numerics — Quantum Relaxation Ordering</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    .tool-card {
+      background: var(--cream-dark);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 1.1rem 1.3rem;
+      margin: 0.8rem 0;
+    }
+    .tool-card h4 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .tool-card p { font-size: 0.95rem; margin: 0; color: var(--ink-mid); }
+    .tool-card .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      background: var(--navy);
+      color: var(--amber-pale);
+      padding: 0.1rem 0.45rem;
+      border-radius: 2px;
+      margin-right: 0.3rem;
+      margin-bottom: 0.4rem;
+    }
+    .scan-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    .scan-table th {
+      background: var(--navy);
+      color: var(--amber-pale);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+    }
+    .scan-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .scan-table tr:last-child td { border-bottom: none; }
+    .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:0.4rem; }
+    .dot-done { background: var(--green-ok); }
+    .dot-prog { background: var(--amber); }
+    .dot-plan { background: #aaa; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="site-title" href="index.html">
+      <strong>Quantum Relaxation Ordering</strong> &nbsp;/&nbsp; Open Science
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dossier.html">Dossier</a>
+      <a href="framework.html">Framework</a>
+      <a href="tutorial.html">Tutorials</a>
+      <a href="numerics.html" class="active">Numerics</a>
+      <a href="references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="status-banner">
+  <div class="status-inner">
+    <span class="status-chip open"><span class="label">toolbox</span>Python / QuTiP · openly inspectable</span>
+    <span class="status-chip pending"><span class="label">results</span>illustrative simulations only · pre-registration pending</span>
+    <span class="status-chip embargo"><span class="label">2016 dataset</span>embargoed until pre-registration filed</span>
+    <span class="status-chip"><span class="label">stewards</span>Colla, A. &amp; Warring, U.</span>
+  </div>
+</div>
+
+<main>
+
+  <h1 class="page-title">Numerics Toolbox</h1>
+  <p class="page-subtitle">Simulation pipeline for quantum relaxation ordering &mdash; open, growing, openly inspectable</p>
+
+  <div class="callout status-note">
+    <div class="callout-label">Toolbox Status</div>
+    All results shown here are from illustrative simulations, not experimental data. Parameters are chosen to make the physics clear, not to match the Freiburg platform precisely. Platform-calibrated runs will be added as the toolbox matures. <strong>Pre-registration is pending.</strong> The 2016 archival dataset will appear here only after the analysis protocol is filed and timestamped.
+  </div>
+
+  <div class="callout embargo-note">
+    <div class="callout-label">2016 Archival Dataset</div>
+    An experimental dataset exists from 2016. It will be released here following pre-registration of the analysis protocol. It is not referenced in any result on this page.
+  </div>
+
+  <!-- Toolbox Overview -->
+  <hr class="section-rule">
+  <h2>Pipeline Overview</h2>
+
+  <p>The simulation pipeline runs in Python using <a href="https://qutip.org" target="_blank">QuTiP</a>. Notebooks live in the <code>scripts/</code> folder of this repository. Results are exported as JSON to <code>data/</code> and rendered here via Chart.js.</p>
+
+  <div class="tool-card">
+    <div>
+      <span class="tag">scripts/01_rss_finder.ipynb</span>
+      <span class="tag">QuTiP</span>
+      <span class="tag">status: active</span>
+    </div>
+    <h4>Module 1 — Reduced Steady State Finder</h4>
+    <p>Computes ρ_ss^{spin} for the spin-motion-bath system. Parameter scans over: detuning (ω_0 − ω_m), coupling g, motional temperature T, and Markovian noise rate γ. Outputs: RSS Bloch vector, Liouvillian spectrum (lowest 6 eigenvalues), relaxation gap Δ.</p>
+  </div>
+
+  <div class="tool-card">
+    <div>
+      <span class="tag">scripts/02_rss_diagnostic.ipynb</span>
+      <span class="tag">QuTiP</span>
+      <span class="tag">status: active</span>
+    </div>
+    <h4>Module 2 — RSS Diagnostic Check</h4>
+    <p>Initialises spin in ρ_ss^{spin}, motion in thermal state at n̄ = 5. Evolves and tracks D(ρ_spin(t), ρ_ss). Confirms RSS is a global but not local fixed point of spin dynamics. Checks Lamb-Dicke correction by scanning η.</p>
+  </div>
+
+  <div class="tool-card">
+    <div>
+      <span class="tag">scripts/03_mpemba_scan.ipynb</span>
+      <span class="tag">QuTiP</span>
+      <span class="tag">status: in progress</span>
+    </div>
+    <h4>Module 3 — Mpemba State-Space Scan</h4>
+    <p>Scans initial spin states on the Bloch sphere. For each, computes D(ρ(0), ρ_ss) and D(ρ(t*), ρ_ss) at the predicted crossing time. Maps the Mpemba manifold in state space. Identifies candidate state pairs (ρ_A, ρ_B) for the experimental test.</p>
+  </div>
+
+  <div class="tool-card">
+    <div>
+      <span class="tag">scripts/04_nonmarkov.ipynb</span>
+      <span class="tag">QuTiP / HEOM</span>
+      <span class="tag">status: planned</span>
+    </div>
+    <h4>Module 4 — Non-Markovian Extension</h4>
+    <p>Implements hierarchical equations of motion (HEOM) for a Drude-Lorentz bath spectral density. Scans bath memory time τ_bath = 1/γ. Tracks how crossing time t* scales with τ_bath. Checks Markovian limit recovery.</p>
+  </div>
+
+  <!-- Progress Table -->
+  <hr class="section-rule">
+  <h2>Simulation Progress</h2>
+
+  <table class="scan-table">
+    <tr>
+      <th>Task</th>
+      <th>Status</th>
+      <th>Parameters covered</th>
+      <th>Output</th>
+    </tr>
+    <tr>
+      <td>RSS finder — Markovian</td>
+      <td><span class="status-dot dot-done"></span>done</td>
+      <td>g = 0.01–0.1, T = 0–10 phonons, γ = 0.01–0.1</td>
+      <td>rss_dynamics.json</td>
+    </tr>
+    <tr>
+      <td>RSS diagnostic check</td>
+      <td><span class="status-dot dot-done"></span>done</td>
+      <td>η = 0.05, 0.10, 0.15 &nbsp;·&nbsp; LD correction check</td>
+      <td>rss_dynamics.json</td>
+    </tr>
+    <tr>
+      <td>Mpemba state-space scan</td>
+      <td><span class="status-dot dot-prog"></span>in progress</td>
+      <td>Bloch sphere grid, 200 points</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Non-Markovian extension (HEOM)</td>
+      <td><span class="status-dot dot-plan"></span>planned</td>
+      <td>τ_bath = 1–100 × τ_relax</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>LD correction comparison</td>
+      <td><span class="status-dot dot-prog"></span>in progress</td>
+      <td>η = 0.05–0.25</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Platform-calibrated run</td>
+      <td><span class="status-dot dot-plan"></span>planned</td>
+      <td>Freiburg Ba⁺ / Ca⁺ parameters</td>
+      <td>—</td>
+    </tr>
+  </table>
+
+  <!-- Figure 1: RSS Diagnostic -->
+  <hr class="section-rule">
+  <h2>Figure 1 — RSS Diagnostic Check</h2>
+
+  <p>The spin is initialised in ρ_ss^{spin}. The motional mode is initialised in a thermal state with n̄ = 5. The trace distance D(ρ_spin(t), ρ_ss) starts near zero, rises as spin-motion entanglement builds, then returns to zero at long times. This confirms that ρ_ss^{spin} is a global but not local fixed point of the spin dynamics — a prerequisite for the Mpemba experiment.</p>
+
+  <div class="chart-wrap">
+    <canvas id="chart-rss" height="220"></canvas>
+    <div class="chart-caption">
+      Fig. 1 — Trace distance D(ρ_spin(t), ρ_ss) for spin initialised in RSS, motion thermal at n̄ = 5. &nbsp;
+      Parameters: ω_0 = ω_m = 1, g = 0.05, γ = 0.02 (Markovian). &nbsp;
+      Illustrative simulation · QuTiP · data/rss_dynamics.json
+    </div>
+  </div>
+
+  <!-- Figure 2: Mpemba Scenario -->
+  <hr class="section-rule">
+  <h2>Figure 2 — Mpemba Scenario (Illustrative)</h2>
+
+  <p>Two initial spin states: state A (farther from ρ_ss, D₀ = 0.45) and state B (closer, D₀ = 0.22). Under the same dynamics, state A crosses below state B in trace distance at t* ≈ 27. This is the Mpemba scenario. The state pair shown here is chosen for visual clarity — the scan for experimentally accessible pairs is ongoing (Module 3).</p>
+
+  <div class="chart-wrap">
+    <canvas id="chart-mpemba" height="220"></canvas>
+    <div class="chart-caption">
+      Fig. 2 — Trace distance trajectories for state A (D₀ = 0.45, amber) and state B (D₀ = 0.22, blue). &nbsp;
+      Crossing at t* ≈ 27 (dashed vertical). &nbsp;
+      Same parameters as Fig. 1. &nbsp;
+      Illustrative simulation · QuTiP · data/rss_dynamics.json
+    </div>
+  </div>
+
+  <!-- Code Snippet -->
+  <hr class="section-rule">
+  <h2>Code Sketch — RSS Finder (QuTiP)</h2>
+
+  <pre><span class="kw">import</span> qutip <span class="kw">as</span> qt
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># System parameters</span>
+omega0 = <span class="nm">1.0</span>    <span class="cm"># spin frequency</span>
+omegam = <span class="nm">1.0</span>    <span class="cm"># motional mode</span>
+g      = <span class="nm">0.05</span>   <span class="cm"># spin-motion coupling</span>
+gamma  = <span class="nm">0.02</span>   <span class="cm"># Markovian decay rate</span>
+n_bar  = <span class="nm">5.0</span>    <span class="cm"># mean phonon number</span>
+N      = <span class="nm">20</span>     <span class="cm"># Fock space truncation</span>
+
+<span class="cm"># Operators</span>
+sm = qt.tensor(qt.sigmam(), qt.qeye(N))      <span class="cm"># spin lowering</span>
+sz = qt.tensor(qt.sigmaz(), qt.qeye(N))      <span class="cm"># spin z</span>
+a  = qt.tensor(qt.qeye(2),  qt.destroy(N))   <span class="cm"># motional lowering</span>
+
+<span class="cm"># Hamiltonian</span>
+H = (omega0/<span class="nm">2</span>) * sz + omegam * a.dag() * a \
+  + g * (sm + sm.dag()) * (a + a.dag())
+
+<span class="cm"># Jump operators (Markovian bath)</span>
+c_ops = [
+    np.sqrt(gamma * (n_bar + <span class="nm">1</span>)) * a,          <span class="cm"># phonon decay</span>
+    np.sqrt(gamma * n_bar)         * a.dag(),   <span class="cm"># phonon creation</span>
+]
+
+<span class="cm"># Solve for steady state</span>
+rho_ss_total = qt.steadystate(H, c_ops)
+
+<span class="cm"># Reduced steady state (spin only)</span>
+rho_ss_spin = rho_ss_total.ptrace(<span class="nm">0</span>)
+
+<span class="cm"># Trace distance function</span>
+<span class="kw">def</span> trace_distance(rho, sigma):
+    diff = rho - sigma
+    <span class="kw">return</span> <span class="nm">0.5</span> * (diff.dag() * diff).sqrtm().tr().real
+
+<span class="cm"># Evolve from RSS initialisation</span>
+rho0 = qt.tensor(rho_ss_spin, qt.thermal_dm(N, n_bar))
+times = np.linspace(<span class="nm">0</span>, <span class="nm">200</span>, <span class="nm">200</span>)
+result = qt.mesolve(H, rho0, times, c_ops, [])
+
+<span class="cm"># Compute trace distance trajectory</span>
+D_vals = [trace_distance(r.ptrace(<span class="nm">0</span>), rho_ss_spin)
+          <span class="kw">for</span> r <span class="kw">in</span> result.states]</pre>
+
+  <p>Full notebooks with parameter scans are in <code>scripts/</code>. Dependencies: <code>qutip&gt;=4.7</code>, <code>numpy</code>, <code>matplotlib</code>, <code>scipy</code>. Install: <code>pip install qutip numpy matplotlib scipy</code>.</p>
+
+</main>
+
+<footer>
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Experimental Quantum &amp; Atomic Physics, Freiburg &nbsp;·&nbsp;
+  <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
+</footer>
+
+<script>
+// ── Load data and render charts ────────────────────────────
+const NAVY   = '#0d1b2a';
+const AMBER  = '#d4860a';
+const AMBERP = '#f0c46a';
+const BLUE   = '#5b9bd5';
+const CREAM  = '#f5f0e8';
+const GRID   = 'rgba(255,255,255,0.07)';
+
+const chartDefaults = {
+  responsive: true,
+  plugins: {
+    legend: {
+      labels: {
+        color: '#a8b8cc',
+        font: { family: "'IBM Plex Mono', monospace", size: 11 }
+      }
+    },
+    tooltip: {
+      backgroundColor: '#162032',
+      titleColor: AMBERP,
+      bodyColor: '#c9d8e8',
+      borderColor: AMBER,
+      borderWidth: 1,
+      callbacks: {
+        label: ctx => ` D = ${ctx.parsed.y.toFixed(4)}`
+      }
+    }
+  },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: 'time  (units: 1/ω₀)',
+        color: '#6a8099',
+        font: { family: "'IBM Plex Mono', monospace", size: 10 }
+      },
+      ticks: { color: '#6a8099', font: { family: "'IBM Plex Mono', monospace", size: 10 } },
+      grid: { color: GRID }
+    },
+    y: {
+      min: 0,
+      title: {
+        display: true,
+        text: 'D(ρ_spin, ρ_ss)',
+        color: '#6a8099',
+        font: { family: "'IBM Plex Mono', monospace", size: 10 }
+      },
+      ticks: { color: '#6a8099', font: { family: "'IBM Plex Mono', monospace", size: 10 } },
+      grid: { color: GRID }
+    }
+  }
+};
+
+fetch('data/rss_dynamics.json')
+  .then(r => r.json())
+  .then(data => {
+
+    // ── Fig 1: RSS diagnostic ──────────────────────────────
+    const ctx1 = document.getElementById('chart-rss').getContext('2d');
+    new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: data.rss_check.times,
+        datasets: [{
+          label: 'D(ρ_spin, ρ_ss)  —  spin initialised in RSS',
+          data: data.rss_check.D_rss_init,
+          borderColor: AMBERP,
+          backgroundColor: 'rgba(240,196,106,0.08)',
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: AMBERP,
+          tension: 0.35,
+          fill: true
+        }]
+      },
+      options: {
+        ...chartDefaults,
+        plugins: {
+          ...chartDefaults.plugins,
+          annotation: {}
+        }
+      }
+    });
+
+    // ── Fig 2: Mpemba scenario ─────────────────────────────
+    const d = data.mpemba_scenario;
+    const ctx2 = document.getElementById('chart-mpemba').getContext('2d');
+
+    // vertical crossing line plugin
+    const crossingPlugin = {
+      id: 'crossingLine',
+      afterDraw(chart) {
+        const xVal = d.crossing_time_predicted;
+        const xAxis = chart.scales.x;
+        const yAxis = chart.scales.y;
+        const xPx = xAxis.getPixelForValue(xVal);
+        const { top, bottom } = yAxis;
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(xPx, top);
+        ctx.lineTo(xPx, bottom);
+        ctx.stroke();
+        ctx.restore();
+        // label
+        ctx.save();
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.font = "10px 'IBM Plex Mono', monospace";
+        ctx.fillText('t*', xPx + 4, top + 14);
+        ctx.restore();
+      }
+    };
+
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: d.times,
+        datasets: [
+          {
+            label: 'State A  (D₀ = 0.45, farther)',
+            data: d.D_state_A,
+            borderColor: AMBERP,
+            backgroundColor: 'rgba(240,196,106,0.06)',
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointBackgroundColor: AMBERP,
+            tension: 0.35,
+            fill: false
+          },
+          {
+            label: 'State B  (D₀ = 0.22, closer)',
+            data: d.D_state_B,
+            borderColor: BLUE,
+            backgroundColor: 'rgba(91,155,213,0.06)',
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointBackgroundColor: BLUE,
+            tension: 0.35,
+            fill: false
+          }
+        ]
+      },
+      options: chartDefaults,
+      plugins: [crossingPlugin]
+    });
+
+  })
+  .catch(err => {
+    console.error('Could not load data/rss_dynamics.json:', err);
+  });
+</script>
+
+</body>
+</html>

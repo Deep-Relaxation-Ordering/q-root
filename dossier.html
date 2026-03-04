@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dossier — Quantum Relaxation Ordering</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="site-title" href="index.html">
+      <strong>Quantum Relaxation Ordering</strong> &nbsp;/&nbsp; Open Science
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dossier.html" class="active">Dossier</a>
+      <a href="framework.html">Framework</a>
+      <a href="tutorial.html">Tutorials</a>
+      <a href="numerics.html">Numerics</a>
+      <a href="references.html">References</a>
+    </nav>
+  </div>
+</header>
+
+<div class="status-banner">
+  <div class="status-inner">
+    <span class="status-chip"><span class="label">version</span>0.3-draft</span>
+    <span class="status-chip open"><span class="label">status</span>internal synthesis · living document</span>
+    <span class="status-chip"><span class="label">scope</span>classical → stochastic → quantum</span>
+    <span class="status-chip"><span class="label">stewards</span>Colla, A. &amp; Warring, U.</span>
+  </div>
+</div>
+
+<main>
+
+  <h1 class="page-title">Research Dossier</h1>
+  <p class="page-subtitle">Mpemba Effect Research Programme &mdash; from classical non-equilibrium relaxation to quantum dynamics</p>
+
+  <dl class="meta-block">
+    <dt>Version</dt><dd>Draft v0.3</dd>
+    <dt>Status</dt><dd>Internal synthesis &nbsp;·&nbsp; not peer-reviewed</dd>
+    <dt>Scope</dt><dd>Classical → Stochastic → Quantum regimes</dd>
+    <dt>Purpose</dt><dd>Consolidate conceptual, experimental, and theoretical directions</dd>
+  </dl>
+
+  <!-- 1 -->
+  <hr class="section-rule">
+  <h2>1 &nbsp; Core Question</h2>
+
+  <p>The Mpemba effect describes situations in which a system initially <em>further</em> from equilibrium relaxes <em>faster</em> than one closer to equilibrium.</p>
+
+  <p><strong>Canonical statement.</strong> If two systems A and B evolve under identical dynamics toward equilibrium, with</p>
+
+  <div class="math-block">
+D(x_A(0), x_eq) &gt; D(x_B(0), x_eq)
+</div>
+
+  <p>but</p>
+
+  <div class="math-block">
+τ_A &lt; τ_B
+</div>
+
+  <p>then system A, which starts <em>farther</em> from equilibrium, equilibrates <em>faster</em>. Here D is a distance measure in state space and τ is a characteristic equilibration time. The effect represents a breakdown of monotonic relaxation ordering.</p>
+
+  <p>Historically discussed in: water freezing experiments (Aristotle → Mpemba → modern thermodynamics); Markovian relaxation processes; glassy dynamics; stochastic systems.</p>
+
+  <!-- 2 -->
+  <hr class="section-rule">
+  <h2>2 &nbsp; Conceptual Reformulation</h2>
+
+  <p>The modern theoretical interpretation is <strong>spectral</strong>. For linear Markov dynamics with generator W:</p>
+
+  <div class="math-block">
+d/dt p(t) = W p(t)
+</div>
+
+  <p>The initial deviation from equilibrium decomposes over eigenmodes v_k of W:</p>
+
+  <div class="math-block">
+p(0) - p_eq = Σ_k  c_k v_k
+</div>
+
+  <p>Relaxation is dominated by the slowest mode v₂, with timescale τ = −1/λ₂. A <strong>strong Mpemba effect</strong> occurs when the initial state has</p>
+
+  <div class="math-block">
+c_2 = ⟨v_2, p(0) − p_eq⟩ = 0
+</div>
+
+  <p>so the slowest mode is absent. Relaxation then proceeds through faster eigenmodes.</p>
+
+  <div class="callout measure">
+    <div class="callout-label">Key Insight</div>
+    The Mpemba effect is fundamentally a <strong>geometric property of initial conditions</strong> in state space — not a thermodynamic anomaly. Initial states that avoid the slow relaxation manifold equilibrate faster despite larger initial distance.
+  </div>
+
+  <!-- 3 -->
+  <hr class="section-rule">
+  <h2>3 &nbsp; Classical Regime</h2>
+
+  <h3>3.1 Macroscopic example: water freezing</h3>
+  <p>Proposed mechanisms include evaporation, convection, dissolved gases, supercooling, and thermal gradients. No single universal mechanism has achieved consensus. However, many experiments show path-dependent cooling trajectories, implying the phenomenon is fundamentally non-equilibrium dynamical.</p>
+
+  <h3>3.2 Markovian stochastic systems</h3>
+  <p>Many minimal models exhibit Mpemba behaviour: energy landscape models, spin systems, glassy relaxation, discrete Markov chains. The theoretical condition is suppression or vanishing of the c₂ overlap. Initial states lie on special manifolds in state space.</p>
+
+  <!-- 4 -->
+  <hr class="section-rule">
+  <h2>4 &nbsp; Quantum Open Systems</h2>
+
+  <p>The concept extends to quantum dynamics. A quantum state ρ(t) evolves under the Lindblad master equation:</p>
+
+  <div class="math-block">
+d/dt ρ = ℒ(ρ)
+</div>
+
+  <p>where ℒ is the Liouvillian superoperator. Spectral decomposition:</p>
+
+  <div class="math-block">
+ρ(t) − ρ_ss = Σ_k  c_k e^{λ_k t} R_k
+</div>
+
+  <p>with eigenoperators R_k. The <strong>quantum Mpemba effect</strong> occurs when c₂ = 0, analogous to the classical case. Quantum coherence can modify relaxation spectra, enabling coherence-induced cancellation of slow Liouvillian modes — a mechanism with no classical analogue.</p>
+
+  <!-- 5 -->
+  <hr class="section-rule">
+  <h2>5 &nbsp; Non-Markovian Extension</h2>
+
+  <p>The non-Markovian quantum Mpemba effect (Strachan et al., PRL 134, 220403, 2025) is the current primary experimental target. Bath memory structure generates qualitatively new crossing patterns in distance trajectories. Predictions include:</p>
+  <ul style="margin-left:1.2rem; margin-bottom:1rem; line-height:2;">
+    <li>Crossings tied to the bath spectral density peak</li>
+    <li>Threshold asymmetry boundaries in initial-state space</li>
+    <li>Robustness predictions against realistic decoherence</li>
+  </ul>
+  <p>These predictions are quantitative and platform-accessible. Their robustness against realistic spectral densities and decoherence is an open question — and the central falsifiable target of this programme.</p>
+
+  <!-- 6 -->
+  <hr class="section-rule">
+  <h2>6 &nbsp; Trapped-Ion Experimental Opportunities</h2>
+
+  <p>The trapped-ion platform provides independent control of spin degrees of freedom, motional modes, engineered dissipation, and stroboscopic driving. Three experimental realisations are under consideration.</p>
+
+  <h3>6.1 Spin + motional mode + Markovian bath</h3>
+  <p>A single spin coupled to a motional mode initialised at temperature T, subject to Markovian noise. The primary simulation target (see Numerics). Find the reduced steady state (RSS) for the spin; identify initial states that equilibrate to RSS faster than RSS itself — the quantum Mpemba scenario.</p>
+
+  <h3>6.2 Non-Markovian bath via spin-boson mapping</h3>
+  <p>Map the trapped-ion system to a spin-boson model with a peaked spectral density. The bath broadening can be engineered via sympathetic cooling with mixed-species ions (see Schätz et al., NJP 2018) or by placing controlled noise on the motional mode. Salvo's simulation code provides a numerical bridge.</p>
+
+  <h3>6.3 Multi-oscillator synchronisation</h3>
+  <p>Initial configurations in a multi-oscillator phase-locking scenario may suppress slow collective Liouvillian modes. Relaxation toward synchronisation could exhibit Mpemba-like ordering — a longer-term direction.</p>
+
+  <!-- 7 -->
+  <hr class="section-rule">
+  <h2>7 &nbsp; Four-Stage Research Programme</h2>
+
+  <div class="stage-grid">
+    <div class="stage-card">
+      <div class="stage-num">Stage 1</div>
+      <h4>Classical Analogue</h4>
+      <p>Motional cooling as controlled Markov relaxation. Demonstrate ordering reversal in motional energy.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">Stage 2</div>
+      <h4>Quantum Mpemba</h4>
+      <p>Lindblad dynamics via optical pumping and engineered dissipation. Test Liouvillian mode suppression.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">Stage 3</div>
+      <h4>Coherent Regime</h4>
+      <p>Near-unitary dynamics. Stroboscopic spin-motion coupling and phase-space tomography.</p>
+    </div>
+    <div class="stage-card">
+      <div class="stage-num">Stage 4</div>
+      <h4>Multi-Oscillator</h4>
+      <p>Collective oscillator relaxation. Mpemba behaviour in synchronisation dynamics.</p>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <hr class="section-rule">
+  <h2>8 &nbsp; Open Questions</h2>
+
+  <ol style="margin-left:1.2rem; line-height:2.2;">
+    <li>What are the necessary and sufficient conditions for a quantum Mpemba effect in a non-Markovian bath?</li>
+    <li>How robust is the crossing against realistic spectral densities and decoherence?</li>
+    <li>Can the effect be exploited for faster state preparation or accelerated metrological readout?</li>
+    <li>Are there connections to shortcuts to adiabaticity, dissipative engineering, or non-Hermitian spectral theory?</li>
+    <li>Does the Lamb-Dicke approximation qualitatively change the predictions?</li>
+  </ol>
+
+  <div class="callout embargo-note">
+    <div class="callout-label">Archival Dataset</div>
+    An experimental dataset exists from 2016. It will be released following pre-registration of the analysis protocol. It is not referenced in any numerical results on this site until that condition is met.
+  </div>
+
+</main>
+
+<footer>
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Experimental Quantum &amp; Atomic Physics, Freiburg &nbsp;·&nbsp;
+  <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
+</footer>
+
+</body>
+</html>
