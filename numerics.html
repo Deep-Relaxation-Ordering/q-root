@@ -52,7 +52,7 @@
     }
     .scan-table tr:last-child td { border-bottom: none; }
     .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:0.4rem; }
-    .dot-done { background: var(--green-ok); }
+    .dot-check { background: #4a8fbd; }
     .dot-prog { background: var(--amber); }
     .dot-plan { background: #aaa; }
   </style>
@@ -158,13 +158,13 @@
     </tr>
     <tr>
       <td>RSS finder — Markovian</td>
-      <td><span class="status-dot dot-done"></span>done</td>
+      <td><span class="status-dot dot-check"></span>needs quality check &amp; discussion</td>
       <td>g = 0.01–0.1, T = 0–10 phonons, γ = 0.01–0.1</td>
       <td>rss_dynamics.json</td>
     </tr>
     <tr>
       <td>RSS diagnostic check</td>
-      <td><span class="status-dot dot-done"></span>done</td>
+      <td><span class="status-dot dot-check"></span>needs quality check &amp; discussion</td>
       <td>η = 0.05, 0.10, 0.15 &nbsp;·&nbsp; LD correction check</td>
       <td>rss_dynamics.json</td>
     </tr>
@@ -280,7 +280,7 @@ D_vals = [trace_distance(r.ptrace(<span class="nm">0</span>), rho_ss_spin)
 </main>
 
 <footer>
-  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Theory · Numerical · Experimental Quantum &amp; Atomic Physics · Freiburg &nbsp;·&nbsp;
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Theory &nbsp;&middot;&nbsp; Numerical &nbsp;&middot;&nbsp; Experimental Quantum &amp; Atomic Physics &nbsp;&middot;&nbsp; Freiburg &nbsp;·&nbsp;
   <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
   CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
 </footer>

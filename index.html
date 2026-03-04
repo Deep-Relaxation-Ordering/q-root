@@ -41,7 +41,7 @@
   <dl class="meta-block">
     <dt>Repository</dt><dd>github.com/quantum-relaxation-ordering</dd>
     <dt>Stewards</dt><dd>Colla, Alessandra &nbsp;&middot;&nbsp; Warring, Ulrich</dd>
-    <dt>Affiliation</dt><dd>Theory Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgnbsp;Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgamp;middot;Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgnbsp; Numerical Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgnbsp;Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgamp;middot;Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgnbsp; Experimental Quantum &amp; Atomic Physics Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgnbsp;Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgmiddot;Experimental Quantum &amp; Atomic Physics, Albert-Ludwigs-Universität Freiburgnbsp; Albert-Ludwigs-Universität Freiburg</dd>
+    <dt>Affiliation</dt><dd>Theory &nbsp;&middot;&nbsp; Numerical &nbsp;&middot;&nbsp; Experimental Quantum &amp; Atomic Physics &nbsp;&middot;&nbsp; Albert-Ludwigs-Universität Freiburg</dd>
     <dt>Launched</dt><dd>2026 &nbsp;&middot;&nbsp; Version 0.1-alpha</dd>
     <dt>Licence</dt><dd>CC BY 4.0 (text) &nbsp;&middot;&nbsp; MIT (code)</dd>
   </dl>
@@ -111,6 +111,23 @@ A quantum Mpemba effect is observed when:
   </div>
 
   <hr class="section-rule">
+  <h2>Contributors &amp; Stewards</h2>
+
+  <div id="contributors-loading" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--ink-light);padding:0.8rem 0;">
+    Loading contributors&hellip;
+  </div>
+  <div id="contributors-root" style="display:none;">
+    <div id="stewards-block" style="margin-bottom:1.8rem;"></div>
+    <h3 style="margin-top:0;">Contribution Tracks</h3>
+    <div id="tracks-block" style="margin-bottom:1.8rem;"></div>
+    <h3>Acknowledgements</h3>
+    <div id="ack-block" style="margin-bottom:1.8rem;"></div>
+    <h3>Contribution Log</h3>
+    <div id="log-block" style="margin-bottom:0.5rem;"></div>
+    <div id="how-block" style="margin-top:1.4rem;"></div>
+  </div>
+
+  <hr class="section-rule">
   <h2>GitBook Links</h2>
   <p>Two precursor documents live in the <em>Ions in Freiburg</em> open-science harbour:</p>
   <ul style="margin-left:1.2rem; margin-bottom:1rem;">
@@ -122,10 +139,197 @@ A quantum Mpemba effect is observed when:
 </main>
 
 <footer>
-  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Theory · Numerical · Experimental Quantum &amp; Atomic Physics · Freiburg &nbsp;·&nbsp;
+  quantum-relaxation-ordering &nbsp;·&nbsp; Colla, A. &amp; Warring, U. &nbsp;·&nbsp; Theory &nbsp;&middot;&nbsp; Numerical &nbsp;&middot;&nbsp; Experimental Quantum &amp; Atomic Physics &nbsp;&middot;&nbsp; Freiburg &nbsp;·&nbsp;
   <a href="https://github.com/quantum-relaxation-ordering" target="_blank">GitHub</a> &nbsp;·&nbsp;
   CC BY 4.0 / MIT &nbsp;·&nbsp; v0.1-alpha
 </footer>
+
+
+<script>
+// ── Contributors renderer ─────────────────────────────────────────────────
+// Reads data/contributors.json and renders the full contributors section.
+
+const TRACK_ICONS = { theory: '◈', numerical: '◉', experimental: '◎' };
+const TRACK_COLS  = { theory: '#5b9bd5', numerical: '#a0c87a', experimental: '#f0c46a' };
+
+function el(tag, attrs, ...children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === 'html') e.innerHTML = v;
+    else if (k === 'class') e.className = v;
+    else e.setAttribute(k, v);
+  }
+  for (const ch of children) {
+    if (typeof ch === 'string') e.appendChild(document.createTextNode(ch));
+    else if (ch) e.appendChild(ch);
+  }
+  return e;
+}
+
+fetch('data/contributors.json')
+  .then(r => r.json())
+  .then(data => {
+
+    // ── Stewards ─────────────────────────────────────────────────────────
+    const stewardWrap = document.getElementById('stewards-block');
+    const stewardGrid = el('div', {
+      style: 'display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;'
+    });
+    for (const s of data.stewards) {
+      const track = s.track.toLowerCase();
+      const col   = TRACK_COLS[track] || '#aaa';
+      const card  = el('div', {
+        style: `background:var(--navy);border-left:3px solid ${col};border-radius:3px;padding:1rem 1.2rem;`
+      });
+      card.appendChild(el('div', {
+        style: `font-family:var(--font-head);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${col};margin-bottom:0.35rem;`
+      }, s.track + ' · Steward'));
+      card.appendChild(el('div', {
+        style: 'font-family:var(--font-head);font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:0.25rem;'
+      }, s.name));
+      card.appendChild(el('div', {
+        style: 'font-size:0.88rem;color:#8aaabb;line-height:1.5;margin-bottom:0.5rem;'
+      }, s.role));
+      card.appendChild(el('a', {
+        href: 'mailto:' + s.contact,
+        style: `font-family:var(--font-mono);font-size:0.72rem;color:${col};border:none;`
+      }, s.contact));
+      stewardGrid.appendChild(card);
+    }
+    stewardWrap.appendChild(stewardGrid);
+
+    // ── Tracks ───────────────────────────────────────────────────────────
+    const tracksWrap = document.getElementById('tracks-block');
+    for (const t of data.tracks) {
+      const col = TRACK_COLS[t.id] || '#aaa';
+      const box = el('div', {
+        style: `border:1px solid var(--rule);border-radius:3px;padding:1rem 1.3rem;margin-bottom:0.8rem;background:var(--cream-dark);`
+      });
+      const head = el('div', {
+        style: 'display:flex;align-items:baseline;gap:0.8rem;margin-bottom:0.4rem;'
+      });
+      head.appendChild(el('span', {
+        style: `font-family:var(--font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${col};`
+      }, t.label + ' Track'));
+      head.appendChild(el('span', {
+        style: 'font-size:0.88rem;color:var(--ink-mid);'
+      }, t.focus));
+      box.appendChild(head);
+
+      const ul = el('ul', { style: 'margin-left:1.1rem;margin-bottom:0.5rem;line-height:1.9;font-size:0.92rem;' });
+      for (const item of t.open_contributions) {
+        ul.appendChild(el('li', {}, item));
+      }
+      box.appendChild(ul);
+
+      if (t.note) {
+        const note = el('div', {
+          style: 'font-size:0.85rem;color:var(--ink-light);font-style:italic;border-top:1px solid var(--rule);padding-top:0.5rem;margin-top:0.4rem;'
+        }, t.note);
+        box.appendChild(note);
+      }
+
+      const contact = el('div', {
+        style: 'font-family:var(--font-mono);font-size:0.72rem;color:var(--ink-light);margin-top:0.4rem;'
+      });
+      contact.innerHTML = '<span style="color:var(--ink-mid)">contact steward: </span>' + t.contact_steward;
+      box.appendChild(contact);
+
+      tracksWrap.appendChild(box);
+    }
+
+    // ── Acknowledgements ─────────────────────────────────────────────────
+    const ackWrap = document.getElementById('ack-block');
+    const table = el('table', {
+      style: 'width:100%;border-collapse:collapse;font-size:0.9rem;'
+    });
+    // header
+    const thead = el('thead');
+    const hr = el('tr');
+    for (const h of ['Name', 'Affiliation', 'Contribution']) {
+      hr.appendChild(el('th', {
+        style: 'background:var(--navy);color:var(--amber-pale);font-family:var(--font-mono);font-size:0.7rem;font-weight:400;letter-spacing:0.06em;padding:0.45rem 0.8rem;text-align:left;'
+      }, h));
+    }
+    thead.appendChild(hr);
+    table.appendChild(thead);
+    const tbody = el('tbody');
+    for (const a of data.acknowledgements) {
+      const tr = el('tr');
+      for (const val of [a.name, a.affiliation, a.contribution]) {
+        tr.appendChild(el('td', {
+          style: 'padding:0.45rem 0.8rem;border-bottom:1px solid var(--rule);font-family:var(--font-mono);font-size:0.78rem;'
+        }, val));
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    ackWrap.appendChild(table);
+    ackWrap.appendChild(el('p', {
+      style: 'font-size:0.82rem;color:var(--ink-light);margin-top:0.6rem;font-style:italic;'
+    }, 'These contributors shaped discussions; they are not responsible for the current form of any document in this repository.'));
+
+    // ── Contribution Log ──────────────────────────────────────────────────
+    const logWrap = document.getElementById('log-block');
+    const logTable = el('table', {
+      style: 'width:100%;border-collapse:collapse;font-size:0.88rem;'
+    });
+    const lthead = el('thead');
+    const lhr = el('tr');
+    for (const h of ['Date', 'Contributor', 'Track', 'Description']) {
+      lhr.appendChild(el('th', {
+        style: 'background:var(--navy);color:var(--amber-pale);font-family:var(--font-mono);font-size:0.7rem;font-weight:400;letter-spacing:0.06em;padding:0.45rem 0.8rem;text-align:left;'
+      }, h));
+    }
+    lthead.appendChild(lhr);
+    logTable.appendChild(lthead);
+    const ltbody = el('tbody');
+    for (const entry of data.contribution_log) {
+      const tr = el('tr');
+      for (const val of [entry.date, entry.contributor, entry.track, entry.description]) {
+        tr.appendChild(el('td', {
+          style: 'padding:0.45rem 0.8rem;border-bottom:1px solid var(--rule);font-family:var(--font-mono);font-size:0.78rem;'
+        }, val));
+      }
+      ltbody.appendChild(tr);
+    }
+    // open row
+    const openTr = el('tr');
+    for (const val of ['—', '—', '—', 'open']) {
+      openTr.appendChild(el('td', {
+        style: 'padding:0.45rem 0.8rem;font-family:var(--font-mono);font-size:0.78rem;color:var(--ink-light);font-style:italic;'
+      }, val));
+    }
+    ltbody.appendChild(openTr);
+    logTable.appendChild(ltbody);
+    logWrap.appendChild(logTable);
+
+    // ── How to Contribute ────────────────────────────────────────────────
+    const howWrap = document.getElementById('how-block');
+    const howBox = el('div', {
+      style: 'background:#edf7f2;border-left:4px solid var(--green-ok);border-radius:3px;padding:1rem 1.3rem;'
+    });
+    const howLabel = el('div', {
+      style: 'font-family:var(--font-head);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-ok);margin-bottom:0.5rem;'
+    }, 'How to Contribute');
+    howBox.appendChild(howLabel);
+    const howOl = el('ol', { style: 'margin-left:1.1rem;line-height:2;font-size:0.95rem;' });
+    for (const step of data.how_to_contribute) {
+      howOl.appendChild(el('li', {}, step));
+    }
+    howBox.appendChild(howOl);
+    howWrap.appendChild(howBox);
+
+    // ── Reveal ───────────────────────────────────────────────────────────
+    document.getElementById('contributors-loading').style.display = 'none';
+    document.getElementById('contributors-root').style.display = 'block';
+
+  })
+  .catch(err => {
+    document.getElementById('contributors-loading').textContent =
+      'Could not load contributors data. (' + err.message + ')';
+  });
+</script>
 
 </body>
 </html>

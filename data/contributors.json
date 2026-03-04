@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "repository": "quantum-relaxation-ordering",
+    "programme": "Can Farther Beat Closer? — Quantum Relaxation Ordering in Trapped-Ion Systems",
+    "affiliation": "Theory · Numerical · Experimental Quantum & Atomic Physics",
+    "institution": "Albert-Ludwigs-Universität Freiburg",
+    "version": "0.1-alpha",
+    "last_updated": "2026-03"
+  },
+  "stewards": [
+    {
+      "name": "Colla, Alessandra",
+      "track": "Theory",
+      "role": "Steward · open quantum systems theory · spin-boson dynamics",
+      "contact": "alessandra.colla@physik.uni-freiburg.de",
+      "orcid": ""
+    },
+    {
+      "name": "Warring, Ulrich",
+      "track": "Experimental",
+      "role": "Steward · trapped-ion platform · experimental design · pre-registration",
+      "contact": "ulrich.warring@physik.uni-freiburg.de",
+      "orcid": ""
+    }
+  ],
+  "tracks": [
+    {
+      "id": "theory",
+      "label": "Theory",
+      "focus": "Analytical and conceptual work on quantum relaxation ordering.",
+      "contact_steward": "Colla, Alessandra",
+      "open_contributions": [
+        "Necessary and sufficient conditions for the non-Markovian quantum Mpemba effect",
+        "Connection to Liouvillian exceptional points and non-Hermitian spectral structure",
+        "Links to shortcuts to adiabaticity and dissipative state engineering",
+        "Robustness analysis against decoherence channels beyond the baseline model",
+        "Extension to multi-qubit or multi-mode systems"
+      ]
+    },
+    {
+      "id": "numerical",
+      "label": "Numerical",
+      "focus": "Simulation pipeline, QuTiP toolbox, non-Markovian extensions.",
+      "contact_steward": "Warring, Ulrich",
+      "open_contributions": [
+        "Module 03: Bloch sphere scan for Mpemba manifold",
+        "Module 04: HEOM implementation for non-Markovian bath",
+        "Salvo's code integration for full spin-boson dynamics",
+        "Platform-calibrated parameter runs (Ba⁺ / Ca⁺)",
+        "Lamb-Dicke correction validation"
+      ]
+    },
+    {
+      "id": "experimental",
+      "label": "Experimental",
+      "focus": "Trapped-ion realisation, tomography, pre-registered measurement protocol.",
+      "contact_steward": "Warring, Ulrich",
+      "open_contributions": [
+        "Apparatus calibration for non-Markovian bath engineering",
+        "State tomography protocol design for trace-distance measurement",
+        "Pre-registration drafting and filing",
+        "Experimental execution (contingent on pre-registration)"
+      ],
+      "note": "The 2016 archival dataset will be incorporated only after the analysis protocol is pre-registered. Experimental contributors are expected to participate in that process."
+    }
+  ],
+  "acknowledgements": [
+    {
+      "name": "Hasse, Florian",
+      "affiliation": "Experimental, Freiburg",
+      "contribution": "Platform expertise · apparatus knowledge"
+    },
+    {
+      "name": "Kemperman (aka Clos), Govinda",
+      "affiliation": "Experimental, Freiburg",
+      "contribution": "2016 dataset context · thesis work"
+    },
+    {
+      "name": "Porras, Diego",
+      "affiliation": "Theory & Numerical",
+      "contribution": "2016 theory and numerical methods discussion"
+    },
+    {
+      "name": "Schätz, Tobias",
+      "affiliation": "Experimental, Freiburg",
+      "contribution": "Spin-boson experimental platform · discussion"
+    },
+    {
+      "name": "Michael (surname TBC)",
+      "affiliation": "Numerical",
+      "contribution": "Numerical methods discussion"
+    }
+  ],
+  "contribution_log": [
+    {
+      "date": "2026-03",
+      "contributor": "Warring, U.",
+      "track": "All",
+      "description": "Repository launch · solo open science"
+    }
+  ],
+  "how_to_contribute": [
+    "Read the Framework page first — especially the Measure Box and the Pre-registration Commitment.",
+    "Browse the Numerics toolbox and the scripts/ notebooks.",
+    "Contact one of the stewards by email to discuss scope before opening a pull request.",
+    "All contributions are CC BY 4.0 (text) / MIT (code) unless explicitly agreed otherwise."
+  ],
+  "licence": {
+    "text": "CC BY 4.0",
+    "code": "MIT"
+  }
+}

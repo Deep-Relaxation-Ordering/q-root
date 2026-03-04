@@ -7,6 +7,8 @@
 
 ---
 
+> **Canonical source:** `data/contributors.json` — the web page at `index.html` renders from this file. Edit the JSON to update all displays.
+
 ## Stewards
 
 | Name | Track | Role | Contact |
@@ -75,9 +77,9 @@ The following people have contributed to discussions that shaped this programme.
 | Name | Affiliation | Contribution |
 |------|-------------|--------------|
 | Hasse, Florian | Experimental, Freiburg | Platform expertise · apparatus knowledge |
-| Kemperman (aka Clos), Govinda| Experimental, Freiburg | 2016 dataset context · thesis work |
-| Schätz, Tobias | Experimental, Freiburg | Spin-boson experimental platform · discussion |
-| Porras, Diego | Numerical | 2016 Theory and Numerical methods discussion |
+| Kemperman (aka Clos), Govinda | Experimental, Freiburg | 2016 dataset context · thesis work |
+| Schätz, Tobias | Experimental, Freiburg | Spin-boson platform · discussion |
+| Porras, Diego | Theory & Numerical | 2016 theory and numerical methods discussion |
 | Michael *(surname TBC)* | Numerical | Numerical methods discussion |
 
 ---
