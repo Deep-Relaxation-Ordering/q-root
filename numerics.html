@@ -185,6 +185,11 @@
       border-radius: 4px;
       padding: 0.7rem 0.5rem 0.5rem;
     }
+    .ld-chart-wrap {
+      position: relative;
+      height: 90px;
+      width: 100%;
+    }
     .ld-label {
       font-family: var(--font-mono);
       font-size: 0.63rem;
@@ -430,7 +435,9 @@ function renderM01(panel, d) {
   ld.results.forEach((r,i)=>{
     const card=el('div',{class:'ld-card'});
     card.appendChild(el('div',{class:'ld-label'},`η = ${r.eta.toFixed(2)}`));
-    card.appendChild(el('canvas',{id:`c-ld-${i}`,height:'90'}));
+    const wrap=el('div',{class:'ld-chart-wrap'});
+    wrap.appendChild(el('canvas',{id:`c-ld-${i}`}));
+    card.appendChild(wrap);
     card.appendChild(el('div',{class:'ld-cross'},
       r.crossing_time ? `t* = ${r.crossing_time.toFixed(2)}` : 'no crossing'));
     strip.appendChild(card);
