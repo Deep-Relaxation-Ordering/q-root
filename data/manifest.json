@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "repository": "quantum-relaxation-ordering",
+    "description": "Simulation module registry — read by numerics.html to auto-populate dashboard",
+    "last_updated": "2026-03-04",
+    "schema_version": "1.0"
+  },
+  "modules": [
+    {
+      "id": "m01",
+      "label": "Module 01 — RSS Finder & Markovian Crossing",
+      "short": "RSS · Liouvillian · Mpemba (Markovian)",
+      "status": "needs_quality_check",
+      "status_label": "needs quality check & discussion",
+      "data_file": "data/latest/m01_rss.json",
+      "script": "scripts/run_simulations.py",
+      "description": "Computes the reduced steady state (RSS), Liouvillian spectrum, RSS diagnostic check, first Mpemba crossing pair (Markovian), and Lamb-Dicke correction scan.",
+      "panels": ["liouvillian_spectrum", "rss_check", "mpemba_scenario", "ld_scan"],
+      "generated": "2026-03-04T11:46:29+00:00",
+      "parameters": {
+        "omega0": 1.0, "omegam": 1.0, "g": 0.05,
+        "gamma": 0.02, "n_bar": 5.0, "N_fock": 20
+      },
+      "key_results": [
+        "RSS purity = 0.504 (near maximally mixed)",
+        "Dominant relaxation time τ = 64.6 / ω₀",
+        "Mpemba crossing found at t* ≈ 7.5 — requires transverse Bloch components",
+        "Purely longitudinal state pairs show NO crossing in Markovian limit",
+        "LD correction (η ≤ 0.20) does not shift crossing time"
+      ],
+      "open_questions": [
+        "Does non-Markovian bath produce persistent (not oscillatory) crossing?",
+        "What is the full geometry of the Mpemba manifold on the Bloch sphere?",
+        "How does crossing structure change with coupling g and bath temperature?"
+      ]
+    },
+    {
+      "id": "m02",
+      "label": "Module 02 — Bloch Sphere Scan (Mpemba Manifold)",
+      "short": "Bloch sphere · crossing geometry",
+      "status": "planned",
+      "status_label": "planned",
+      "data_file": null,
+      "script": "scripts/02_bloch_scan.py",
+      "description": "Full Bloch sphere scan mapping which initial-state pairs produce a Mpemba crossing. Identifies the crossing manifold and its dependence on system parameters.",
+      "panels": [],
+      "generated": null,
+      "parameters": null,
+      "key_results": [],
+      "open_questions": [
+        "What is the codimension of the Mpemba manifold?",
+        "Is there a simple spectral condition (c₁ = 0) that predicts it?"
+      ]
+    },
+    {
+      "id": "m03",
+      "label": "Module 03 — Parameter Scan (g, T, γ)",
+      "short": "Parameter space · crossing robustness",
+      "status": "planned",
+      "status_label": "planned",
+      "data_file": null,
+      "script": "scripts/03_param_scan.py",
+      "description": "Systematic scan over coupling strength g, motional temperature (n̄), and bath rate γ. Maps crossing time t* and crossing depth across parameter space.",
+      "panels": [],
+      "generated": null,
+      "parameters": null,
+      "key_results": [],
+      "open_questions": [
+        "At what coupling strength g does the crossing become experimentally resolvable?",
+        "How does t* scale with τ_bath = 1/γ?"
+      ]
+    },
+    {
+      "id": "m04",
+      "label": "Module 04 — Non-Markovian Extension (HEOM)",
+      "short": "HEOM · bath memory · non-Markovian",
+      "status": "planned",
+      "status_label": "planned",
+      "data_file": null,
+      "script": "scripts/04_nonmarkov_heom.py",
+      "description": "Hierarchical equations of motion (HEOM) for a Drude-Lorentz bath spectral density. Tests the Strachan et al. (PRL 134, 220403) prediction: bath memory produces qualitatively new crossing structure.",
+      "panels": [],
+      "generated": null,
+      "parameters": null,
+      "key_results": [],
+      "open_questions": [
+        "Does non-Markovian bath produce a persistent (not transient) Mpemba crossing?",
+        "How does crossing time t* scale with bath memory time τ_bath = 1/γ_bath?",
+        "Is the crossing robust against realistic spectral densities?"
+      ]
+    }
+  ],
+  "status_legend": {
+    "needs_quality_check": "Simulation complete. Results need scientific review before interpretation.",
+    "in_progress": "Simulation running or partially complete.",
+    "planned": "Module designed, script not yet run.",
+    "reviewed": "Results reviewed and annotated by stewards."
+  }
+}
